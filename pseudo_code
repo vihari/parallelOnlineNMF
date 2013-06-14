@@ -1,0 +1,38 @@
+mat <-Read the matrix
+read the r option
+analyze r,d,n values exit if there is error.
+F<-allocate
+G<-allocate
+//The notation we consider here is X=F*transpose(G)
+//gi is the ith column of transpose(G)
+Initialize F and G with non negative values.
+
+Repeat until all the data is used up.
+1) get a row of data X
+2) solve for gi;
+3) Update F
+
+Explanation of 2):
+gi is the solution of the nls problem
+minimization of ||x-Fg||**2
+with F regarded as constant and parameters g
+by minimizing frobenious loss.
+constraints:
+gi should be non-negative and
+sum of all elements in gi should add up to 1.
+
+Explanation of 3):
+update g(t) from F(t-1)
+Consider the whole of the data so far to 
+update F.
+minimize the frobenious loss for whole of 
+the data and g(t) available.
+Convex optimization can help but, may be 
+computationally costly.
+So consider second order Projected Gradient descent(PGD)
+The equations are a bit too complex, that I have to change 
+the encoding of the file or write it in too naive way.
+(so refer paper)[3]
+	    
+
+
