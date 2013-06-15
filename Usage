@@ -1,0 +1,15 @@
+Use rand_mat.c to produce a randome matrix.
+
+-------------------------------------------
+Note that if you wish to use rand_mat along with onlineNMF 
+then #rows should be greater than #columns
+-------------------------------------------
+
+Usage of rand_mat.c is
+rand_mat [#rows] [#columns] >file
+
+Usage of onlineNMF.c
+onlineNMF [r] <file
+
+file should contain the matrix in the format that rand_mat dumps.
+r is the number of rows of and columns of G in F*G

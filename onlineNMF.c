@@ -17,7 +17,7 @@
 #include "levmar-2.6/levmar.h"
 
 #ifndef LM_DBL_PREC
-#error Demo program assumes that levmar has been compiled with double precision, see LM_DBL_PREC!
+#error This program assumes that levmar has been compiled with double precision, see LM_DBL_PREC!
 #endif
 
 /*The product should not exceed 10**7 for avoiding seg fault*/
