@@ -1,31 +1,30 @@
+#include <math.h>
 #include <stdio.h>
+#include <gsl/gsl_matrix.h>
 #include <gsl/gsl_blas.h>
      
 int
 main (void)
 {
-  double a[] = { 0.11, 0.12, 0.13,
-		 0.21, 0.22, 0.23 };
+  size_t i,j;
      
-  double b[] = { 1011, 1012,
-		 1021, 1022,
-		 1031, 1032 };
+  gsl_matrix *m = gsl_matrix_alloc (10, 10);
      
-  double c[] = { 0.00, 0.00,
-		 0.00, 0.00 };
+  for (i = 0; i < 10; i++)
+    for (j = 0; j < 10; j++)
+      gsl_matrix_set (m, i, j, sin (i) + cos (j));
      
-  gsl_matrix_view A = gsl_matrix_view_array(a, 2, 3);
-  gsl_matrix_view B = gsl_matrix_view_array(b, 3, 2);
-  gsl_matrix_view C = gsl_matrix_view_array(c, 2, 2);
+  for (j = 0; j < 10; j++)
+    {
+      gsl_vector_view column = gsl_matrix_column (m, j);
+      double d;
      
-  /* Compute C = A B */
+      d = gsl_blas_dnrm2 (&column.vector);
      
-  gsl_blas_dgemm (CblasNoTrans, CblasNoTrans,
-		  1.0, &A.matrix, &B.matrix,
-		  0.0, &C.matrix);
+      printf ("matrix column %d, norm = %g\n", j, d);
+    }
      
-  printf ("[ %g, %g\n", c[0], c[1]);
-  printf ("  %g, %g ]\n", c[2], c[3]);
+  gsl_matrix_free (m);
      
-  return 0;  
+  return 0;
 }
